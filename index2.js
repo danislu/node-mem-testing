@@ -1,6 +1,6 @@
-const axios = require('axios');
-const fs = require('fs')
-const readline = require('readline');
+import fs from 'fs';
+import axios from 'axios';
+import readline from 'readline';
 
 const rl = readline.createInterface({
   input: fs.createReadStream('input.txt'),
@@ -8,7 +8,7 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', (path) => {
-  for (let index = 0; index < 100; index++) {
+  for (let index = 0; index < 5; index++) {
     axios.get(path)
       .then(
         (response) => console.log("👍", path, response?.status),
@@ -18,4 +18,4 @@ rl.on('line', (path) => {
 });
 
 rl.on('close', () => console.log("DONE"));
-  
+

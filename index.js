@@ -1,6 +1,6 @@
-const csv = require('csv-parser')
-const fs = require('fs')
-const axios = require('axios');
+import csv from 'csv-parser';
+import fs from 'fs';
+import axios from 'axios';
 
 fs.createReadStream('log2.csv')
   .pipe(csv())
@@ -8,6 +8,10 @@ fs.createReadStream('log2.csv')
   .on('data', (data) => {
     try {
       const path = data.path;
+      if (path.includes("_next")) {
+        return;
+      }
+
       axios.get(`http://localhost:3000${path}`)
         .then(
           (response) => console.log("👍", path, response?.status),
